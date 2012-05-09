@@ -1,13 +1,9 @@
 """config.py: Config file for codesamplr"""
 
-
-import os
-from string import Template
-
 VERBOSE = False
 
 # Ensure that only files with the following file types are converted
-ALLOW_FILETYPES = ['.py']
+ALLOW_FILETYPES = ['.py', '.html', '.js', '.sh']
 
 # Ensure that files with the following file types are ignored
 DISALLOWED_FILETYPES = []

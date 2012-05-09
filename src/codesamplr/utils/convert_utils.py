@@ -17,7 +17,7 @@ from pygments import highlight
 from pygments.lexers import get_lexer_for_filename
 from pygments.formatters import HtmlFormatter
 
-import config
+import codesamplr.config as config
 
 def return_HTML_highlighted_code(filepath):
     """Return code as syntax highlighted HTML"""

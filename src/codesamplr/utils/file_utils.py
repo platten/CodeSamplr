@@ -6,16 +6,16 @@ import os
 from pygments.lexers import get_lexer_for_filename
 from pygments.util import ClassNotFound
 
-import config
+import codesamplr.config as config
 
 def should_open(filepath):
 	"""Check if should open file"""
 	filename =  os.path.split(filepath)[1]
 	if os.path.isfile(filepath) and is_binary(filepath) or \
 	   filename in config.FILTER_FILENAMES or \
-		(config.ALLOW_FILETYPES and \
+		(config.ALLOW_FILETYPES and
 	     os.path.splitext(filename)[1] not in config.ALLOW_FILETYPES) or \
-		(config.DISALLOWED_FILETYPES and \
+		(config.DISALLOWED_FILETYPES and
 		 os.path.splitext(filename)[1] in config.ALLOW_FILETYPES):
 		if config.VERBOSE:
 			sys.stderr.write('IGNORING: %s\n' % filepath)
