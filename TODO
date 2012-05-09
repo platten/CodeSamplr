@@ -1,0 +1,6 @@
+TODO
+General: Add footer
+General: Add proper config parser
+Tests: Test expected failures
+Other: Create TOC from
+Other: compose single HTML document from multiple files (and use TOC for inner-PDF bookmarks)
