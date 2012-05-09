@@ -8,19 +8,19 @@ sys.path.append('./src')
 from codesamplr.codesamplr import __version__ as codesamplr_version
 
 setup(
-    name = 'CodeSamplr',
+    name         = 'CodeSamplr',
     author       = 'Paul Pietkiewicz',
     author_email = 'pawel.pietkiewicz@acm.org',
-    description  = 'Convert sourcecode into encrypted PDFs with highlighted syntax',
+    description  = 'Convert sourcecode into encrypted PDFs with ' \
+                   'highlighted syntax',
     license      = 'PSF',
     keywords     = 'encrypt pdf syntax highlight',
     url          = 'https://github.com/platten/CodeSamplr/',
 
     version          = codesamplr_version,
     install_requires = ['pygments'],
-	packages         = ['codesamplr', 'codesamplr.utils'],
-	package_dir      = {'codesamplr': 'src/codesamplr','codesamplr.utils': 'src/codesamplr/utils'},
+    packages         = ['codesamplr', 'codesamplr.utils'],
+    package_dir      = {'codesamplr': 'src/codesamplr',
+                        'codesamplr.utils': 'src/codesamplr/utils'},
     scripts          = glob.glob("bin/*")
 )
-
-

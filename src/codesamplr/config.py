@@ -9,9 +9,9 @@ ALLOW_FILETYPES = ['.py', '.html', '.js', '.sh']
 DISALLOWED_FILETYPES = []
 
 # Filter out the following files
-FILTER_FILENAMES=['__init__.py']
+FILTER_FILENAMES = ['__init__.py']
 
-CAN_COPY=False
-CAN_PRINT=False
-CAN_MODIFY=False
-CAN_ANNOTATE=False
+CAN_COPY = False
+CAN_PRINT = False
+CAN_MODIFY = False
+CAN_ANNOTATE = False

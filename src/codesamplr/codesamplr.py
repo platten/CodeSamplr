@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-"""codesamplr.py: Convert sourcecode to encrypted PDFs with highlighted syntax."""
+"""codesamplr.py: Convert sourcecode to encrypted PDFs with highlighted
+                  syntax."""
 
 __author__    = "Paul Pietkiewicz"
 __copyright__ = "Copyright 2012, Paul Pietkiewicz"
@@ -20,16 +21,21 @@ from utils import file_utils
 
 import config
 
+
 def main():
     """CLI Driver"""
-    parser = argparse.ArgumentParser(description='Source code to encrypted PDF generator', \
+    parser = argparse.ArgumentParser(description='Source code to encrypted '
+                                                 'PDF generator', \
                                      prog='codesamplr.py')
 
-    parser.add_argument('sourceDirectory', help='Directory containing source cdoe')
+    parser.add_argument('sourceDirectory',
+                        help='Directory containing source cdoe')
     parser.add_argument('-d', '--dest_format', dest='destination_path',
                         help='Destination directory')
     parser.add_argument('-f', '--footer', dest='footer',
-        help='Footer (use for confidential message, etc.)\n NOTE: only works when using qt patched wkhtmltopdf', default='Confidential')
+        help='Footer (use for confidential message, etc.)\n '
+             'NOTE: only works when using qt patched wkhtmltopdf',
+        default='Confidential')
     #parser.add_argument('-c', '--config', dest='config_path', \
     #                    help='Path to alternate config file', action='store')
     parser.add_argument('-p', '--password', dest='password', \
@@ -55,7 +61,7 @@ def main():
     convert_utils.VERBOSE = cli_args.verbose
 
     process = partial(processFile, delete=delete, encrypted=cli_args.encrypt,
-                                    password=cli_args.password, footer=cli_args.footer)
+                            password=cli_args.password, footer=cli_args.footer)
 
     for file in file_list:
         response = process(file)
@@ -65,14 +71,17 @@ def main():
 
     sys.exit(0)
 
+
 def processFile(source_filepath, delete, encrypted, password, footer):
     html = return_HTML_highlighted_code(source_filepath)
     pdf = create_PDF(html, footer='bob')
     pdf_filepath = get_pdf_filename(source_filepath)
-    response = write_PDF(pdf_filepath, pdf, encrypted=encrypted, password=password)
+    response = write_PDF(pdf_filepath, pdf, encrypted=encrypted,
+                    password=password)
     if delete:
         os.unlink(source_filepath)
     return response
+
 
 if __name__ == "__main__":
     main()
