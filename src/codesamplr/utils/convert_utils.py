@@ -34,6 +34,7 @@ def return_HTML_highlighted_code(filepath):
 
 
 def reportlab_write_PDF(target_path, pdf_data, encrypted=True, password=''):
+    from reportlab.lib.pdfencrypt import encryptPdfOnDisk
     if encrypted:
         if not password:
             password = _generate_password()
@@ -144,10 +145,8 @@ if not 'create_PDF' in globals():
 
 if not 'write_PDF' in globals():
     try:
-        from reportlab.lib.pdfencrypt import encryptPdfOnDisk
-        from rlextra.pageCatcher import pageCatcher
-        write_PDF = reportlab_write_PDF
-    except ImportError:
         pdftk_path = subprocess.check_output('which pdftk',
-                                                shell=True).rstrip()
+                                            shell=True).rstrip()
         write_PDF = partial(pdktk_write_PDF, pdftk_path=pdftk_path)
+    except subprocess.CalledProcessError:
+        write_PDF = reportlab_write_PDF
