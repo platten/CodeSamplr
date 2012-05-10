@@ -3,13 +3,13 @@
 VERBOSE = False
 
 # Ensure that only files with the following file types are converted
-ALLOW_FILETYPES = ['.py', '.html', '.js', '.sh']
+ALLOW_FILETYPES = []
 
 # Ensure that files with the following file types are ignored
-DISALLOWED_FILETYPES = []
+DISALLOWED_FILETYPES = ['.txt']
 
 # Filter out the following files
-FILTER_FILENAMES = ['__init__.py']
+FILTER_FILENAMES = []
 
 CAN_COPY = False
 CAN_PRINT = False
