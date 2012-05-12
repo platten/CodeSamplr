@@ -20,7 +20,9 @@ So you can print it out and take it to your interview. You can take pictures of 
 
 Or you could have the file packaged up in an syntax highlighted encrypted PDF.
 
-That what this does. Yes, it keeps your directory structure in tact and converts each file one by one to pdfs. No it doesn't organize everything in one nice big PDF, but its a start.
+Here is what it did: It used to keep your directory structure in tact and converts each file one by one to pdfs.
+
+What it does now: it organizes everything in one nice big PDF.
 
 
 Where:
@@ -32,14 +34,14 @@ Prereqs:
 --------
 - Python 2.7
 - [pygments](http://pygments.org/)
-
--  A PDF generating library like [wkhtmltopdf](https://code.google.com/p/wkhtmltopdf/) (or [reportlab](https://www.reportlab.com/software/))
-- Something for PDF Encryption like [pdftk](http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/) (or [reportlab w/ rlextras](https://www.reportlab.com/software/installation/))
-
+- [jinja2](http://jinja.pocoo.org/)
+- [highlight](http://www.andre-simon.de/zip/download.html)
+- [TexLive](http://www.tug.org/texlive/)
+- [pdftk](http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 
 Tested Installation on Ubuntu 10.04:
 ====================================
-    sudo apt-get install git python-pygments pdftk wkhtmltopdf
+    sudo apt-get install git python-pygments python-jinja2 pdftk highlight texlive-full
     git clone http://github.com/platten/CodeSamplr
     cd CodeSamplr
     sudo python setup.py install

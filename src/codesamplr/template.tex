@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{color}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\usepackage{alltt}
+\usepackage{dirtree}
+\usepackage[bookmarks, colorlinks=true, pdftitle={{'{'+title+'}'}}, pdfauthor={{'{'+author+'}'}}]{hyperref}
+
+\input {{'{'+highlight_path+'}'}}
+\begin{document}
+\pagecolor{bgcolor}
+
+\title{ {{ title }} }
+\author{ {{ author }} }
+\date{}
+\maketitle
+
+\newpage
+\section{Contents}
+
+{{ tree|e }}
+
+\newsavebox{\hlboxopenbrace}
+\newsavebox{\hlboxclosebrace}
+\newsavebox{\hlboxlessthan}
+\newsavebox{\hlboxgreaterthan}
+\newsavebox{\hlboxdollar}
+\newsavebox{\hlboxunderscore}
+\newsavebox{\hlboxand}
+\newsavebox{\hlboxhash}
+\newsavebox{\hlboxat}
+\newsavebox{\hlboxbackslash}
+\newsavebox{\hlboxpercent}
+\newsavebox{\hlboxhat}
+\setbox\hlboxopenbrace=\hbox{\verb.{.}
+\setbox\hlboxclosebrace=\hbox{\verb.}.}
+\setbox\hlboxlessthan=\hbox{\verb.<.}
+\setbox\hlboxgreaterthan=\hbox{\verb.>.}
+\setbox\hlboxdollar=\hbox{\verb.$.}
+\setbox\hlboxunderscore=\hbox{\verb._.}
+\setbox\hlboxand=\hbox{\verb.&.}
+\setbox\hlboxhash=\hbox{\verb.#.}
+\setbox\hlboxat=\hbox{\verb.@.}
+\setbox\hlboxbackslash=\hbox{\verb.\.}
+\setbox\hlboxpercent=\hbox{\verb.\%.}
+\setbox\hlboxhat=\hbox{\verb.^.}
+\def\urltilda{\kern -.15em\lower .7ex\hbox{\~{}}\kern .04em}
+\noindent
+\ttfamily
+
+
+{% for file in syntaxfiles %}
+\newpage
+\section{{'{'+file.safename+'}'}}
+\label{{'{'+file.hash+'}'}}
+{{'{'+file.texcontent+'}'}}
+{% endfor %}
+
+\end {document}

@@ -1,9 +1,0 @@
-TODO
-General: LaTex, nuff said
-General: more work on watermark/footer
-General: Add proper config parser
-Tests: Test expected failures
-Tests: add skipped tests if missing dependencies
-Tests: footer tests
-Other: Create TOC from
-Other: compose single HTML document from multiple files (and use TOC for inner-PDF bookmarks)
