@@ -8,7 +8,6 @@ from string import digits, ascii_letters
 import sys
 import os
 import subprocess
-import re
 
 from jinja2 import Template
 from pygments.lexers import get_lexer_for_filename
@@ -52,11 +51,6 @@ def random_id(length=50):
 
     id_list.append(new_id)
     return new_id
-
-
-def latex_escaped(dirty_str):
-    return re.sub('_', '\textunderscore ', dirty_str).encode('string-escape')
-
 
 #
 # Data conversion
@@ -170,9 +164,9 @@ def directory_walker(root_dir, config):
                     level = this_level
                     dirname = os.path.basename(os.path.dirname(file_path))
                     tree_list.append('.' + str(this_level - 1) +
-                                     ' ' + latex_escaped(dirname) + '.')
+                                     ' ' + escape_latex(dirname) + '.')
                 try:
-                    temp_dict = {'safename': latex_escaped(os.path.basename(
+                    temp_dict = {'safename': escape_latex(os.path.basename(
                                                                 file_path)),
                                  'hash': random_id(),
                                  'texcontent': get_tex_syntax(file_path)}
@@ -194,8 +188,55 @@ def get_level(path, root_dir):
 
 def prep_data(path, config):
     file_list, tree = directory_walker(path, config)
-    return {'author': latex_escaped(config['AUTHOR']),
-            'title': latex_escaped(config['TITLE']),
-            'highlight_path': latex_escaped(config['HIGHLIGHT']),
+    return {'author': escape_latex(config['AUTHOR']),
+            'title': escape_latex(config['TITLE']),
+            'highlight_path': escape_latex(config['HIGHLIGHT']),
             'tree': tree,
             'syntaxfiles': file_list}
+
+#
+# Taken from Volker Grabsch's tex module
+# http://packages.python.org/tex/
+#
+_latex_special_chars = {
+	u'$':  u'\\$',
+	u'%':  u'\\%',
+	u'&':  u'\\&',
+	u'#':  u'\\#',
+	u'_':  u'\\_',
+	u'{':  u'\\{',
+	u'}':  u'\\}',
+	u'[':  u'{[}',
+	u']':  u'{]}',
+	u'"':  u"{''}",
+	u'\\': u'\\textbackslash{}',
+	u'~':  u'\\textasciitilde{}',
+	u'<':  u'\\textless{}',
+	u'>':  u'\\textgreater{}',
+	u'^':  u'\\textasciicircum{}',
+	u'`':  u'{}`',   # avoid ?` and !`
+	u'\n': u'\\\\',
+}
+
+def escape_latex(s):
+	r'''Escape a unicode string for LaTeX.
+
+	:Warning:
+	  The source string must not contain empty lines such as:
+	      - u'\n...' -- empty first line
+	      - u'...\n\n...' -- empty line in between
+	      - u'...\n' -- empty last line
+
+	:Parameters:
+	  - `s`: unicode object to escape for LaTeX
+
+	>>> s = u'\\"{}_&%a$b#\nc[]"~<>^`\\'
+	>>> escape_latex(s)
+	u"\\textbackslash{}{''}\\{\\}\\_\\&\\%a\\$b\\#\\\\c{[}{]}{''}\\textasciitilde{}\\textless{}\\textgreater{}\\textasciicircum{}{}`\\textbackslash{}"
+	>>> print s
+	\"{}_&%a$b#
+	c[]"~<>^`\
+	>>> print escape_latex(s)
+	\textbackslash{}{''}\{\}\_\&\%a\$b\#\\c{[}{]}{''}\textasciitilde{}\textless{}\textgreater{}\textasciicircum{}{}`\textbackslash{}
+	'''
+	return u''.join(_latex_special_chars.get(c, c) for c in s)
