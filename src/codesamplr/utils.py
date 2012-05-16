@@ -190,7 +190,7 @@ def prep_data(path, config):
     file_list, tree = directory_walker(path, config)
     return {'author': escape_latex(config['AUTHOR']),
             'title': escape_latex(config['TITLE']),
-            'highlight_path': escape_latex(config['HIGHLIGHT']),
+            'highlight_path': config['HIGHLIGHT'],
             'tree': tree,
             'syntaxfiles': file_list}
 
