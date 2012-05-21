@@ -154,18 +154,21 @@ def directory_walker(root_dir, config):
     tree_list = ["\dirtree{%", ".1 root."]
     root_dir = os.path.abspath(root_dir)
     level = 2
-    dirname = os.path.basename(os.path.dirname(root_dir))
+    dirname = os.path.basename(root_dir)
     for root, dirs, files in os.walk(root_dir):
         for name in files:
             file_path = os.path.join(root, name)
             if should_open(file_path, config):
                 this_level = get_level(file_path, root_dir)
-                if this_level != level or \
-                   os.path.basename(os.path.dirname(file_path)) != dirname:
+                if this_level != level or\
+                   os.path.dirname(os.path.abspath(file_path)) != dirname:
+                    paths = os.path.relpath(os.path.abspath(os.path.dirname(file_path)), os.path.abspath(dirname)).split('/')
+                    level -= paths.count('..')
+                    for temp_level in xrange(0, this_level - level):
+                        tree_list.append('.' + str(temp_level + level) +
+                                     ' ' + escape_latex(paths[temp_level + paths.count('..')]) + '.')
                     level = this_level
-                    dirname = os.path.basename(os.path.dirname(file_path))
-                    tree_list.append('.' + str(this_level - 1) +
-                                     ' ' + escape_latex(dirname) + '.')
+                    dirname =  os.path.dirname(os.path.abspath(file_path))
                 try:
                     temp_dict = {'safename': escape_latex(os.path.basename(
                                                                 file_path)),
@@ -191,6 +194,7 @@ def prep_data(path, config):
     file_list, tree = directory_walker(path, config)
     return {'author': escape_latex(config['AUTHOR']),
             'title': escape_latex(config['TITLE']),
+            'email': escape_latex(config['EMAIL']),
             'highlight_path': escape_latex(config['HIGHLIGHT']),
             'tree': tree,
             'syntaxfiles': file_list}

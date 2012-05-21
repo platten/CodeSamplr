@@ -6,7 +6,7 @@
 __author__    = "Paul Pietkiewicz"
 __copyright__ = "Copyright 2012, Paul Pietkiewicz"
 __email__     = "pawel.pietkiewicz@acm.org"
-__version__   = '0.9'
+__version__   = '0.92'
 
 import sys
 import argparse

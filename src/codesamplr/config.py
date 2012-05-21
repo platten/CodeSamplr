@@ -19,7 +19,8 @@ def return_config_dict(config_path):
                                                     'filter_filenames')),
         'ENCRYPT': config.getboolean('Encryption', 'encrypt'),
         'AUTHOR': config.get('Document', 'author'),
-        'TITLE': config.get('Document', 'title')
+        'TITLE': config.get('Document', 'title'),
+        'EMAIL': config.get('Document', 'email')
     }
 
     if config.get('Encryption', 'password'):
@@ -32,8 +33,8 @@ def return_config_dict(config_path):
     else:
         config_dict['TEMPLATE'] = os.path.join(prefix, 'template.tex')
 
-    if config.get('Paths', 'template_file'):
-        config_dict['HIGHLIGHT'] = config.get('Paths', 'highlight_file')
+    if config.get('Paths', 'highlight_path'):
+        config_dict['HIGHLIGHT'] = config.get('Paths', 'highlight_path')
     else:
         config_dict['HIGHLIGHT'] = os.path.join(prefix, 'highlight.sty')
 

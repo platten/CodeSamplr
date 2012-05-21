@@ -1,6 +1,11 @@
 CHANGES:
 ========
 
+0.92
+----
+ - fixed tree/toc generation
+ - added option to add email to title page
+
 0.9
 ---
  - single PDF is now created
