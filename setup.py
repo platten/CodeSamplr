@@ -18,7 +18,7 @@ setup(
 	url          = 'https://github.com/platten/CodeSamplr/',
 
 	version          = codesamplr_version,
-	install_requires = ['pygments', 'jinja2'],
+	install_requires = ['pygments', 'jinja2', 'unidecode'],
 	packages         = ['codesamplr'],
 	package_dir      = {'codesamplr': 'src/codesamplr'},
 	package_data     = {'codesamplr': ['highlight.sty', 'codesamplr.cfg', 'template.tex']},

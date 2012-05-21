@@ -35,13 +35,14 @@ Prereqs:
 - Python 2.7
 - [pygments](http://pygments.org/)
 - [jinja2](http://jinja.pocoo.org/)
+- [unidecode](http://pypi.python.org/pypi/Unidecode/0.04.9)
 - [highlight](http://www.andre-simon.de/zip/download.html)
 - [TexLive](http://www.tug.org/texlive/)
 - [pdftk](http://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/)
 
 Tested Installation on Ubuntu 10.04:
 ====================================
-    sudo apt-get install git python-pygments python-jinja2 pdftk highlight texlive-full
+    sudo apt-get install git python-pygments python-jinja2 python-unidecode pdftk highlight texlive-full
     git clone http://github.com/platten/CodeSamplr
     cd CodeSamplr
     sudo python setup.py install

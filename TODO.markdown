@@ -3,13 +3,12 @@ TODO
 
 General:
 --------
- - watermark/footer
  - rip out pygments, substitute with mimetype
  - multiple theme support (pull themes in from highlight)
 
 LaTex:
 ------
- - try to get LaTex to play nice with UTF8 encoded source files
+ - try to get LaTex to play nice with UTF8 encoded source files (vs. ignoring unicode)
  - make it prettier/cleanup
  - NDA section
  - ability to attach description to each included source file

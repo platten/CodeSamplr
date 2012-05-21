@@ -12,6 +12,7 @@ import subprocess
 from jinja2 import Template
 from pygments.lexers import get_lexer_for_filename
 from pygments.util import ClassNotFound
+from unidecode import unidecode
 
 id_list = []
 
@@ -60,9 +61,9 @@ def get_tex_syntax(path):
         shell=True).rstrip()
 
     #TODO.markdown: this unicode stuff should be cleaned up
-    content = unicode(subprocess.check_output('%s --style solarized-light -O '
+    content = unidecode(subprocess.check_output('%s --style solarized-light -O '
                                   'latex --pretty-symbols -l  -f "%s"' % \
-                                (highlight_path, path), shell=True), 'utf-8')
+                                (highlight_path, path), shell=True))
     return content
 
 
