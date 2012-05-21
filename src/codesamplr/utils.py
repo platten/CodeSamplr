@@ -60,7 +60,6 @@ def get_tex_syntax(path):
     highlight_path = subprocess.check_output('which highlight',
         shell=True).rstrip()
 
-    #TODO.markdown: this unicode stuff should be cleaned up
     content = unidecode(subprocess.check_output('%s --style solarized-light -O '
                                   'latex --pretty-symbols -l  -f "%s"' % \
                                 (highlight_path, path), shell=True))
@@ -195,7 +194,7 @@ def prep_data(path, config):
     return {'author': escape_latex(config['AUTHOR']),
             'title': escape_latex(config['TITLE']),
             'email': escape_latex(config['EMAIL']),
-            'highlight_path': escape_latex(config['HIGHLIGHT']),
+            'highlight_path': config['HIGHLIGHT'],
             'tree': tree,
             'syntaxfiles': file_list}
 
